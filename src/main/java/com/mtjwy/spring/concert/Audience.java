@@ -1,7 +1,9 @@
 package com.mtjwy.spring.concert;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -15,6 +17,19 @@ public class Audience {
 	@Pointcut("execution(* com.mtjwy.spring.concert.Performance.perform(..))")
 	public void perform() {}
 	
+	@Around("perform()")
+	public void watchPerformance(ProceedingJoinPoint jp) {
+		try {
+			System.out.println("Silencing cell Phones");
+			System.out.println("Taking seats");
+			jp.proceed();//If don¡¯t include proceed(), then the advice will effectively block access to the advised method.
+			System.out.println("CLAP CLAP CLAP!!!");
+		} catch (Throwable e) {
+			System.out.println("Demanding a refund");
+		}
+	}
+	
+	/*
 	//The advice method is called before the advised method is called.
 	@Before("perform()")
 	public void silenceCellPhones() {
@@ -37,6 +52,7 @@ public class Audience {
 	public void demandRefund() {
 		System.out.println("Demanding a refund");
 	}
+	*/
 	
 	
 }
