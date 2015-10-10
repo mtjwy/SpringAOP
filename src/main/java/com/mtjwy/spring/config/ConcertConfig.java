@@ -6,14 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.mtjwy.spring.concert.Audience;
+import com.mtjwy.spring.concert.Scannable;
 
 @Configuration
-@ComponentScan
 @EnableAspectJAutoProxy//turn on auto-proxying to interpreted @Aspect annotations and created the proxies that turn the annotated class bean into an aspect
+@ComponentScan(basePackageClasses = Scannable.class)
 public class ConcertConfig {
-
-	@Bean//Declare Audience bean
+	
+	@Bean
 	public Audience audience() {
-	return new Audience();
+		return new Audience();
 	}
+	
 }
