@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.mtjwy.spring.concert.Audience;
+import com.mtjwy.spring.concert.EncoreableIntroducer;
 import com.mtjwy.spring.concert.Scannable;
 
 @Configuration
@@ -16,6 +17,11 @@ public class ConcertConfig {
 	@Bean
 	public Audience audience() {
 		return new Audience();
+	}
+	
+	@Bean
+	public EncoreableIntroducer encoreableIntroducer() {
+		return new EncoreableIntroducer();
 	}
 	
 }
